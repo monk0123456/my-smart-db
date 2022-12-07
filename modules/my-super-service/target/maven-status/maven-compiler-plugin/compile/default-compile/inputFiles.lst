@@ -12,6 +12,8 @@
 /Users/chenfei/Documents/Java/SmartSql/gridgain/modules/my-super-service/src/main/java/cn/mysuper/model/MyUrlToken.java
 /Users/chenfei/Documents/Java/SmartSql/gridgain/modules/my-super-service/src/main/java/cn/myservice/jdbc/CallFuncService.java
 /Users/chenfei/Documents/Java/SmartSql/gridgain/modules/my-super-service/src/main/java/cn/myservice/MyLoadCronService.java
+/Users/chenfei/Documents/Java/SmartSql/gridgain/modules/my-super-service/src/main/java/cn/myservice/MyInsertKvService.java
+/Users/chenfei/Documents/Java/SmartSql/gridgain/modules/my-super-service/src/main/java/cn/smart/service/IMyInsertKv.java
 /Users/chenfei/Documents/Java/SmartSql/gridgain/modules/my-super-service/src/main/java/cn/myservice/MySqlAstService.java
 /Users/chenfei/Documents/Java/SmartSql/gridgain/modules/my-super-service/src/main/java/cn/myservice/MyThinStatementService.java
 /Users/chenfei/Documents/Java/SmartSql/gridgain/modules/my-super-service/src/main/java/cn/myservice/MyLoadScriptService.java

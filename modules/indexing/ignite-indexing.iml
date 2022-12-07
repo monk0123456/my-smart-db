@@ -12,8 +12,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ignite-shmem-8.7.3" level="project" />
-    <orderEntry type="module" module-name="ignite-core" />
     <orderEntry type="module" module-name="my-super-service" />
+    <orderEntry type="module" module-name="ignite-core" />
     <orderEntry type="library" name="Maven: org.clojure:clojure:1.10.1" level="project" />
     <orderEntry type="library" name="Maven: org.clojure:spec.alpha:0.2.176" level="project" />
     <orderEntry type="library" name="Maven: org.clojure:core.specs.alpha:0.2.44" level="project" />
