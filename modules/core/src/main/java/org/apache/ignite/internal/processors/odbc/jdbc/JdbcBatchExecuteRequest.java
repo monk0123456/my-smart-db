@@ -41,6 +41,11 @@ public class JdbcBatchExecuteRequest extends JdbcRequest {
     private boolean autoCommit;
 
     /**
+     * userToken
+     * */
+    private String userToken;
+
+    /**
      * Last stream batch flag - whether open streamers on current connection
      * must be flushed and closed after this batch.
      */
@@ -67,13 +72,14 @@ public class JdbcBatchExecuteRequest extends JdbcRequest {
      * @param autoCommit Client auto commit flag state.
      * @param lastStreamBatch {@code true} in case the request is the last batch at the stream.
      */
-    public JdbcBatchExecuteRequest(String schemaName, List<JdbcQuery> queries, boolean autoCommit,
+    public JdbcBatchExecuteRequest(String schemaName, String userToken, List<JdbcQuery> queries, boolean autoCommit,
         boolean lastStreamBatch) {
         super(BATCH_EXEC);
 
         assert lastStreamBatch || !F.isEmpty(queries);
 
         this.schemaName = schemaName;
+        this.userToken = F.isEmpty(userToken) ? null : userToken;
         this.queries = queries;
         this.autoCommit = autoCommit;
         this.lastStreamBatch = lastStreamBatch;
@@ -88,13 +94,14 @@ public class JdbcBatchExecuteRequest extends JdbcRequest {
      * @param autoCommit Client auto commit flag state.
      * @param lastStreamBatch {@code true} in case the request is the last batch at the stream.
      */
-    protected JdbcBatchExecuteRequest(byte type, String schemaName, List<JdbcQuery> queries, boolean autoCommit,
+    protected JdbcBatchExecuteRequest(byte type, String schemaName, String userToken, List<JdbcQuery> queries, boolean autoCommit,
         boolean lastStreamBatch) {
         super(type);
 
         assert lastStreamBatch || !F.isEmpty(queries);
 
         this.schemaName = schemaName;
+        this.userToken = F.isEmpty(userToken) ? null : userToken;
         this.queries = queries;
         this.autoCommit = autoCommit;
         this.lastStreamBatch = lastStreamBatch;
@@ -105,6 +112,10 @@ public class JdbcBatchExecuteRequest extends JdbcRequest {
      */
     @Nullable public String schemaName() {
         return schemaName;
+    }
+
+    @Nullable public String userToken() {
+        return userToken;
     }
 
     /**
@@ -135,6 +146,7 @@ public class JdbcBatchExecuteRequest extends JdbcRequest {
         super.writeBinary(writer, protoCtx);
 
         writer.writeString(schemaName);
+        writer.writeString(userToken);
 
         if (!F.isEmpty(queries)) {
             writer.writeInt(queries.size());
@@ -158,6 +170,7 @@ public class JdbcBatchExecuteRequest extends JdbcRequest {
         super.readBinary(reader, protoCtx);
 
         schemaName = reader.readString();
+        userToken = reader.readString();
 
         int n = reader.readInt();
 

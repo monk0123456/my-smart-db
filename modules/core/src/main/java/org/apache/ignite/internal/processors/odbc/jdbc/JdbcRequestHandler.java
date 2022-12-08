@@ -956,6 +956,7 @@ public class JdbcRequestHandler implements ClientListenerRequestHandler {
 
         try {
             String schemaName = prepareSchemaName(req.schemaName());
+            String userToken = req.userToken();
 
             int qryCnt = req.queries().size();
 
@@ -969,7 +970,7 @@ public class JdbcRequestHandler implements ClientListenerRequestHandler {
             for (JdbcQuery q : req.queries()) {
                 if (q.sql() != null) { // If we have a new query string in the batch,
                     if (qry != null) // then execute the previous sub-batch and create a new SqlFieldsQueryEx.
-                        executeBatchedQuery(qry, updCntsAcc, firstErr, cancel);
+                        executeBatchedQuery(userToken, qry, updCntsAcc, firstErr, cancel);
 
                     qry = new SqlFieldsQueryEx(q.sql(), false);
 
@@ -984,7 +985,7 @@ public class JdbcRequestHandler implements ClientListenerRequestHandler {
             }
 
             if (qry != null)
-                executeBatchedQuery(qry, updCntsAcc, firstErr, cancel);
+                executeBatchedQuery(userToken, qry, updCntsAcc, firstErr, cancel);
 
             if (req.isLastStreamBatch())
                 cliCtx.disableStreaming();
@@ -1048,12 +1049,12 @@ public class JdbcRequestHandler implements ClientListenerRequestHandler {
      * @throws QueryCancelledException If query was cancelled during execution.
      */
     @SuppressWarnings({"ForLoopReplaceableByForEach"})
-    private void executeBatchedQuery(SqlFieldsQueryEx qry, List<Integer> updCntsAcc,
+    private void executeBatchedQuery(String userToken, SqlFieldsQueryEx qry, List<Integer> updCntsAcc,
         IgniteBiTuple<Integer, String> firstErr, GridQueryCancel cancel) throws QueryCancelledException {
         try {
             if (cliCtx.isStream()) {
                 List<Long> cnt = connCtx.kernalContext().query().streamBatchedUpdateQuery(
-                    qry.getSchema(),
+                    qry.getSchema(), userToken,
                     cliCtx,
                     qry.getSql(),
                     qry.batchedArguments(),

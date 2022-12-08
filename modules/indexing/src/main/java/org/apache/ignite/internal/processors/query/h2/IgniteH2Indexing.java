@@ -736,7 +736,7 @@ public class IgniteH2Indexing implements GridQueryIndexing {
 
     /** {@inheritDoc} */
     @SuppressWarnings({"ForLoopReplaceableByForEach", "ConstantConditions"})
-    public List<Long> myStreamBatchedUpdateQuery(
+    @Override public List<Long> myStreamBatchedUpdateQuery(
             String userToken,
             String qry,
             List<Object[]> params,
@@ -760,9 +760,12 @@ public class IgniteH2Indexing implements GridQueryIndexing {
         }
         String cacheName = ht.get("cache_name").toString();
 
-        IgniteDataStreamer<?, ?> streamer = cliCtx.streamerForCache(cacheName);
+        IgniteDataStreamer streamer = cliCtx.streamerForCache(cacheName);
 
         List<Long> ress = new ArrayList<>(params.size());
+
+        streamer.allowOverwrite(true);
+        streamer.addData(ht.get("key"), ht.get("value"));
 
 //        for (int i = 0; i < params.size(); i++) {
 //            long res = streamQuery0(qry, schemaName, streamer, dml, params.get(i), qryInitiatorId);

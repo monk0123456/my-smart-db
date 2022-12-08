@@ -2991,7 +2991,7 @@ public class GridQueryProcessor extends GridProcessorAdapter {
      * @param args Query arguments.
      * @return Update counters.
      */
-    public List<Long> streamBatchedUpdateQuery(final String schemaName, final SqlClientContext cliCtx,
+    public List<Long> streamBatchedUpdateQuery(final String schemaName, final String userToken, final SqlClientContext cliCtx,
         final String qry, final List<Object[]> args, String qryInitiatorId) {
         checkxEnabled();
 
@@ -3001,7 +3001,8 @@ public class GridQueryProcessor extends GridProcessorAdapter {
         try {
             return executeQuery(GridCacheQueryType.SQL_FIELDS, qry, null, new IgniteOutClosureX<List<Long>>() {
                 @Override public List<Long> applyx() throws IgniteCheckedException {
-                    return idx.streamBatchedUpdateQuery(schemaName, qry, args, cliCtx, qryInitiatorId);
+                    //return idx.streamBatchedUpdateQuery(schemaName, qry, args, cliCtx, qryInitiatorId);
+                    return idx.myStreamBatchedUpdateQuery(userToken, qry, args, cliCtx, qryInitiatorId);
                 }
             }, true);
         }

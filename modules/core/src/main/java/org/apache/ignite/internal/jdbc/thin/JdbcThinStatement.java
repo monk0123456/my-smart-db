@@ -21,6 +21,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cn.myservice.MyLoadScriptService;
 import cn.myservice.MySqlAstService;
@@ -259,8 +261,21 @@ public class JdbcThinStatement implements Statement {
         return sb.toString();
     }
 
+    private boolean isStream(String sql)
+    {
+        String pattern = "^SET\\s+STREAMING\\s+";
+        Pattern p = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE|Pattern.MULTILINE);
+        Matcher m = p.matcher(sql.trim());
+        return m.find();
+    }
+
     public String myExecuteQuery(String sql) throws SQLException {
         if (!Strings.isNullOrEmpty(this.conn.getUserToken())) {
+
+            if (isStream(sql))
+            {
+                return sql;
+            }
 
             // 如果 mylst 中包括：loadFromNative 函数，则先执行这个函数来提交给服务器
 
@@ -328,7 +343,15 @@ public class JdbcThinStatement implements Statement {
 
     /** {@inheritDoc} */
     @Override public ResultSet executeQuery(String sql0) throws SQLException {
-        String sql = myExecuteQuery(sql0);
+        String sql = "";
+        if (!conn.isStream())
+        {
+            sql = myExecuteQuery(sql0);
+        }
+        else
+        {
+            sql = sql0;
+        }
         execute0(JdbcStatementType.SELECT_STATEMENT_TYPE, sql, null);
 
         ResultSet rs = getResultSet();
@@ -578,21 +601,30 @@ public class JdbcThinStatement implements Statement {
     }
 
     /** {@inheritDoc} */
-    @Override public int executeUpdate(String sql) throws SQLException {
-//        execute0(JdbcStatementType.UPDATE_STMT_TYPE, myExecuteQuery(sql), null);
-//
-//        int res = getUpdateCount();
-//
-//        if (res == -1)
-//            throw new SQLException("The query is not DML statememt: " + sql);
-//
-//        return res;
-        boolean f = this.execute(sql);
-        if (f == true)
+    @Override public int executeUpdate(String sql0) throws SQLException {
+        String sql = "";
+        if (!conn.isStream())
         {
-            return 0;
+            sql = myExecuteQuery(sql0);
         }
-        return -1;
+        else
+        {
+            sql = sql0;
+        }
+        execute0(JdbcStatementType.UPDATE_STMT_TYPE, sql, null);
+
+        int res = getUpdateCount();
+
+        if (res == -1)
+            throw new SQLException("The query is not DML statememt: " + sql);
+
+        return res;
+//        boolean f = this.execute(sql);
+//        if (f == true)
+//        {
+//            return 0;
+//        }
+//        return -1;
     }
 
     /** {@inheritDoc} */
@@ -760,7 +792,15 @@ public class JdbcThinStatement implements Statement {
 
     /** {@inheritDoc} */
     @Override public boolean execute(String sql0) throws SQLException {
-        String sql = myExecuteQuery(sql0);
+        String sql = "";
+        if (!conn.isStream())
+        {
+            sql = myExecuteQuery(sql0);
+        }
+        else
+        {
+            sql = sql0;
+        }
         ensureNotClosed();
 
         execute0(JdbcStatementType.ANY_STATEMENT_TYPE, sql, null);
@@ -851,7 +891,15 @@ public class JdbcThinStatement implements Statement {
 
     /** {@inheritDoc} */
     @Override public void addBatch(String sql0) throws SQLException {
-        String sql = myExecuteQuery(sql0);
+        String sql = "";
+        if (!conn.isStream())
+        {
+            sql = myExecuteQuery(sql0);
+        }
+        else
+        {
+            sql = sql0;
+        }
         ensureNotClosed();
 
         checkStatementEligibleForBatching(sql);
@@ -920,7 +968,7 @@ public class JdbcThinStatement implements Statement {
         if (F.isEmpty(batch))
             return new int[0];
 
-        JdbcBatchExecuteRequest req = new JdbcBatchExecuteRequest(conn.getSchema(), batch,
+        JdbcBatchExecuteRequest req = new JdbcBatchExecuteRequest(conn.getSchema(), conn.getUserToken(), batch,
             conn.getAutoCommit(), false);
 
         try {

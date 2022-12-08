@@ -69,7 +69,15 @@ public class JdbcThinPreparedStatement extends JdbcThinStatement implements Prep
     JdbcThinPreparedStatement(JdbcThinConnection conn, String sql, int resHoldability, String schema) throws SQLException {
         super(conn, resHoldability, schema);
 
-        this.sql = myExecuteQuery(sql);
+        if (!conn.isStream())
+        {
+            this.sql = myExecuteQuery(sql);
+        }
+        else
+        {
+            this.sql = sql;
+        }
+        //this.sql = myExecuteQuery(sql);
     }
 
     /** {@inheritDoc} */

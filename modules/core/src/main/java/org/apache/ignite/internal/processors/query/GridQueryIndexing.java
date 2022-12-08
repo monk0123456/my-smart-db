@@ -137,6 +137,9 @@ public interface GridQueryIndexing {
     public List<Long> streamBatchedUpdateQuery(String schemaName, String qry, List<Object[]> params,
         SqlClientContext cliCtx, String qryInitiatorId) throws IgniteCheckedException;
 
+    public List<Long> myStreamBatchedUpdateQuery(String schemaName, String qry, List<Object[]> params,
+                                               SqlClientContext cliCtx, String qryInitiatorId) throws IgniteCheckedException;
+
     /**
      * Executes text query.
      *
