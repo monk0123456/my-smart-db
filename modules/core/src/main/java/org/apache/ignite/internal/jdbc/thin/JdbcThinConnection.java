@@ -1513,7 +1513,7 @@ public class JdbcThinConnection implements Connection {
                 respSem.acquire();
 
                 sendRequestNotWaitResponse(
-                    new JdbcOrderedBatchExecuteRequest(schema, streamBatch, autoCommit, lastBatch, order),
+                    new JdbcOrderedBatchExecuteRequest(schema, userToken, streamBatch, autoCommit, lastBatch, order),
                     streamingStickyIo);
 
                 streamBatch = null;

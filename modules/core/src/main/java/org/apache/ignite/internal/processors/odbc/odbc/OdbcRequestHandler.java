@@ -582,7 +582,7 @@ public class OdbcRequestHandler implements ClientListenerRequestHandler {
             assert cliCtx.isStream();
 
             ctx.query().streamBatchedUpdateQuery(
-                OdbcUtils.prepareSchema(qry.getSchema()),
+                OdbcUtils.prepareSchema(qry.getSchema()), "",
                 cliCtx,
                 qry.getSql(),
                 qry.batchedArguments(),

@@ -269,50 +269,70 @@ public class JdbcThinStatement implements Statement {
         return m.find();
     }
 
+    private boolean isStream(List<List<String>> lst)
+    {
+        if (lst.size() == 1)
+        {
+            List<String> rs = lst.get(0);
+            if (rs.size() > 2)
+            {
+                if (rs.get(0).toUpperCase().equals("SET") && rs.get(1).toUpperCase().equals("STREAMING"))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public String myExecuteQuery(String sql) throws SQLException {
         if (!Strings.isNullOrEmpty(this.conn.getUserToken())) {
 
-            if (isStream(sql))
+            if (this.mySqlAst != null)
             {
+                List<List<String>> lstSegment = mySqlAst.getSmartSegment(sql);
+                if (isStream(lstSegment))
+                {
+                    return sql;
+                }
+
+                // 如果 mylst 中包括：loadFromNative 函数，则先执行这个函数来提交给服务器
+
+                //String mysql0 = String.format("select smartSql(%s, ?)", this.conn.getGroup_id());
+                String mysql0 = "select smartSql(?,?)";
+                //String mysql0 = "select my_line_inary(?)";
+                List<Object> lst = new ArrayList<Object>();
+                lst.add(MyLineToBinary.objToBytes(this.conn.getUserToken()));
+                if (this.myLoadScript != null) {
+                    List<List<String>> myLst = reList(lstSegment);
+                    lst.add(MyLineToBinary.objToBytes(myLst));
+                }
+                else
+                {
+                    lst.add(MyLineToBinary.objToBytes(sql));
+                }
+
+                //lst.add(sql);
+                execute0(JdbcStatementType.SELECT_STATEMENT_TYPE, mysql0, lst);
+
+                ResultSet rs = getResultSet();
+
+                if (rs == null)
+                    throw new SQLException("The query isn't SELECT query: " + sql, SqlStateCode.PARSING_EXCEPTION);
+
+                String mysql = "";
+                while (rs.next()) {
+                    mysql = rs.getString(1);
+                }
+                rs.close();
+
+                if (!Strings.isNullOrEmpty(mysql))
+                {
+                    return mysql;
+                }
+
                 return sql;
             }
-
-            // 如果 mylst 中包括：loadFromNative 函数，则先执行这个函数来提交给服务器
-
-            //String mysql0 = String.format("select smartSql(%s, ?)", this.conn.getGroup_id());
-            String mysql0 = "select smartSql(?,?)";
-            //String mysql0 = "select my_line_inary(?)";
-            List<Object> lst = new ArrayList<Object>();
-            lst.add(MyLineToBinary.objToBytes(this.conn.getUserToken()));
-            if (this.mySqlAst != null && this.myLoadScript != null) {
-                List<List<String>> myLst = reList(mySqlAst.getSmartSegment(sql));
-                lst.add(MyLineToBinary.objToBytes(myLst));
-            }
-            else
-            {
-                lst.add(MyLineToBinary.objToBytes(sql));
-            }
-
-            //lst.add(sql);
-            execute0(JdbcStatementType.SELECT_STATEMENT_TYPE, mysql0, lst);
-
-            ResultSet rs = getResultSet();
-
-            if (rs == null)
-                throw new SQLException("The query isn't SELECT query: " + sql, SqlStateCode.PARSING_EXCEPTION);
-
-            String mysql = "";
-            while (rs.next()) {
-                mysql = rs.getString(1);
-            }
-            rs.close();
-
-            if (!Strings.isNullOrEmpty(mysql))
-            {
-                return mysql;
-            }
-
-            return sql;
         }
         return null;
     }
