@@ -749,23 +749,29 @@ public class IgniteH2Indexing implements GridQueryIndexing {
             return zeroBatchedStreamedUpdateResult(params.size());
         }
 
-        Hashtable<String, Object> ht;
+        List<Hashtable<String, Object>> lst;
         if (params != null && params.size() > 0)
         {
-            ht = MyInsertKvService.getInstance().getMyInsertKv().getInsertKvAgrs(userToken, qry, params.get(0));
+            lst = MyInsertKvService.getInstance().getMyInsertKv().getInsertKvAgrs(userToken, qry, params.get(0));
         }
         else
         {
-            ht = MyInsertKvService.getInstance().getMyInsertKv().getInsertKvAgrs(userToken, qry, null);
+            lst = MyInsertKvService.getInstance().getMyInsertKv().getInsertKvAgrs(userToken, qry, null);
         }
-        String cacheName = ht.get("cache_name").toString();
 
-        IgniteDataStreamer streamer = cliCtx.streamerForCache(cacheName);
+        List<Long> ress = new ArrayList<>();
+        if (lst.size() > 0) {
+            Hashtable<String, Object> ht = lst.get(0);
+            String cacheName = ht.get("cache_name").toString();
 
-        List<Long> ress = new ArrayList<>(params.size());
+            IgniteDataStreamer streamer = cliCtx.streamerForCache(cacheName);
 
-        streamer.allowOverwrite(true);
-        streamer.addData(ht.get("key"), ht.get("value"));
+            streamer.allowOverwrite(true);
+
+            for (Hashtable<String, Object> m : lst) {
+                streamer.addData(m.get("key"), m.get("value"));
+            }
+        }
 
 //        for (int i = 0; i < params.size(); i++) {
 //            long res = streamQuery0(qry, schemaName, streamer, dml, params.get(i), qryInitiatorId);
