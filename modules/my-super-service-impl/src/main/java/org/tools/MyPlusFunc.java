@@ -63,7 +63,7 @@ public class MyPlusFunc implements Serializable {
      * 1、必须有一个默认构造函数
      * 2、方法名不能重载
      * */
-    public static Object myFun(final String methodName, final Object... ps) {
+    public static List myFun(final String methodName, final Object... ps) {
         return myPlusFunc.myFun(methodName, ps);
     }
 //     public static Object myFun(final String methodName, final String... ps) {
@@ -76,9 +76,14 @@ public class MyPlusFunc implements Serializable {
     /**
      * 场景调用
      * */
-    public static Object myInvoke(final String methodName, final String group_id, final Object... ps)
+//    public static Object myInvoke(final String methodName, final Long group_id, final Object... ps)
+//    {
+//        return myPlusFunc.myInvoke(methodName, group_id, ps);
+//    }
+    public static List myInvoke(final String methodName, final String user_token, final Object... ps)
     {
-        return myPlusFunc.myInvoke(methodName, group_id, ps);
+        return myPlusFunc.myInvoke(methodName, user_token, ps);
+        //return MyConvertUtil.ConvertToString(myPlusFunc.myInvoke(methodName, user_token, ps));
     }
 //    public static String myInvoke(final String methodName, final String group_id, final String... ps)
 //    {
@@ -88,9 +93,13 @@ public class MyPlusFunc implements Serializable {
     /**
      * 联接函数的调用
      * */
-    public static Object myInvokeLink(final String methodName, final String group_id, final Object... ps)
+//    public static Object myInvokeLink(final String methodName, final Long group_id, final Object... ps)
+//    {
+//        return myPlusFunc.myInvokeLink(methodName, group_id, ps);
+//    }
+    public static List myInvokeLink(final String methodName, final String user_token, final Object... ps)
     {
-        return myPlusFunc.myInvokeLink(methodName, group_id, ps);
+        return myPlusFunc.myInvokeLink(methodName, user_token, ps);
     }
 //    public static String myInvokeLink(final String methodName, final String group_id, final String... ps)
 //    {
@@ -100,9 +109,13 @@ public class MyPlusFunc implements Serializable {
     /**
      * 联接函数的调用
      * */
-    public static Object myInvokeAllFuncScenes(final String methodName, final String group_id, final Object... ps)
+//    public static Object myInvokeAllFuncScenes(final String methodName, final Long group_id, final Object... ps)
+//    {
+//        return myPlusFunc.myInvokeAllFuncScenes(methodName, group_id, ps);
+//    }
+    public static List myInvokeAllFuncScenes(final String methodName, final String user_token, final Object... ps)
     {
-        return myPlusFunc.myInvokeAllFuncScenes(methodName, group_id, ps);
+        return myPlusFunc.myInvokeAllFuncScenes(methodName, user_token, ps);
     }
 //    public static String myInvokeAllFuncScenes(final String methodName, final String group_id, final String... ps)
 //    {

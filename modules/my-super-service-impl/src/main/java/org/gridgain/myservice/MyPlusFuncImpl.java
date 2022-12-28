@@ -47,40 +47,77 @@ public class MyPlusFuncImpl implements IMyPlusFunc {
 //    }
 
     @Override
-    public Object myFun(String methodName, Object... ps) {
-        return MyPlusUtil.invokeFuncObj(Ignition.ignite(), methodName, ps);
-    }
-
-    @Override
-    public Object myInvoke(String methodName, String group_id, Object... ps) {
+    public List myFun(String methodName, Object... ps) {
         List<Object> lst = new ArrayList<>();
         for (Object m : ps)
         {
             lst.add(m);
         }
-        return this.mySmartScenes.invokeScenes(Ignition.ignite(), MyGson.lineToObj(group_id), methodName, lst);
+        return this.mySmartScenes.invokeFunc(Ignition.ignite(), methodName, lst);
     }
 
+//    @Override
+//    public Object myInvoke(String methodName, String group_id, Object... ps) {
+//        List<Object> lst = new ArrayList<>();
+//        for (Object m : ps)
+//        {
+//            lst.add(m);
+//        }
+//        return this.mySmartScenes.invokeScenes(Ignition.ignite(), MyGson.lineToObj(group_id), methodName, lst);
+//    }
+
     @Override
-    public Object myInvokeLink(String methodName, String group_id, Object... ps) {
+    public List myInvoke(String methodName, String user_token, Object... ps) {
         List<Object> lst = new ArrayList<>();
         for (Object m : ps)
         {
             lst.add(m);
         }
-        Object rs = mySmartScenes.invokeScenesLink(Ignition.ignite(), MyGson.lineToObj(group_id), methodName, lst);
-        return rs;
+        return this.mySmartScenes.invokeScenes(Ignition.ignite(), user_token, methodName, lst);
     }
 
+//    @Override
+//    public Object myInvokeLink(String methodName, String group_id, Object... ps) {
+//        List<Object> lst = new ArrayList<>();
+//        for (Object m : ps)
+//        {
+//            lst.add(m);
+//        }
+//        Object rs = mySmartScenes.invokeScenesLink(Ignition.ignite(), MyGson.lineToObj(group_id), methodName, lst);
+//        return rs;
+//    }
+
     @Override
-    public Object myInvokeAllFuncScenes(String methodName, String group_id, Object... ps) {
+    public List myInvokeLink(String methodName, String user_token, Object... ps) {
         List<Object> lst = new ArrayList<>();
         for (Object m : ps)
         {
             lst.add(m);
         }
-        Object rs = SmartJdbcFunc.invokeAllFuncScenes(Ignition.ignite(), MyGson.lineToObj(group_id), methodName, lst);
-        return rs;
+
+        return mySmartScenes.invokeScenesLink(Ignition.ignite(), user_token, methodName, lst);
+    }
+
+//    @Override
+//    public Object myInvokeAllFuncScenes(String methodName, String group_id, Object... ps) {
+//        List<Object> lst = new ArrayList<>();
+//        for (Object m : ps)
+//        {
+//            lst.add(m);
+//        }
+//        Object rs = SmartJdbcFunc.invokeAllFuncScenes(Ignition.ignite(), MyGson.lineToObj(group_id), methodName, lst);
+//        return rs;
+//    }
+
+    @Override
+    public List myInvokeAllFuncScenes(String methodName, String user_token, Object... ps) {
+        List<Object> lst = new ArrayList<>();
+        for (Object m : ps)
+        {
+            lst.add(m);
+        }
+
+        return SmartJdbcFunc.invokeAllFuncScenes(Ignition.ignite(), user_token, methodName, lst);
     }
 
 //    @Override

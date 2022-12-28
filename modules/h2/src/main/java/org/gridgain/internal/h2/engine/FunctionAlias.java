@@ -12,6 +12,7 @@ import java.lang.reflect.Modifier;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.gridgain.internal.h2.command.Parser;
 import org.gridgain.internal.h2.expression.Expression;
@@ -25,10 +26,7 @@ import org.gridgain.internal.h2.table.Table;
 import org.gridgain.internal.h2.util.JdbcUtils;
 import org.gridgain.internal.h2.util.SourceCompiler;
 import org.gridgain.internal.h2.util.StringUtils;
-import org.gridgain.internal.h2.value.DataType;
-import org.gridgain.internal.h2.value.Value;
-import org.gridgain.internal.h2.value.ValueArray;
-import org.gridgain.internal.h2.value.ValueNull;
+import org.gridgain.internal.h2.value.*;
 
 /**
  * Represents a user-defined function, or alias.
@@ -321,7 +319,8 @@ public class FunctionAlias extends SchemaObjectBase {
     public static class JavaMethod implements Comparable<JavaMethod> {
         private final int id;
         private final Method method;
-        private final int dataType;
+        //private final int dataType;
+        private int dataType;
         private boolean hasConnectionParam;
         private boolean varArgs;
         private Class<?> varArgClass;
@@ -482,6 +481,18 @@ public class FunctionAlias extends SchemaObjectBase {
                 } catch (Exception e) {
                     throw DbException.convert(e);
                 }
+
+                if ((returnValue != null) && (returnValue instanceof List))
+                {
+                    List rv = (List) returnValue;
+                    if (rv.size() == 2)
+                    {
+                        dataType = DataType.getTypeFromClass((Class<?>) rv.get(1));
+                        Value ret = DataType.convertToValue(session, rv.get(0), dataType);
+                        return ret;
+                    }
+                }
+
                 if (Value.class.isAssignableFrom(method.getReturnType())) {
                     return (Value) returnValue;
                 }
