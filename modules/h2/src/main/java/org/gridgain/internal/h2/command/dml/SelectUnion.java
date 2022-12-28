@@ -27,6 +27,7 @@ import org.gridgain.internal.h2.table.ColumnResolver;
 import org.gridgain.internal.h2.table.Table;
 import org.gridgain.internal.h2.table.TableFilter;
 import org.gridgain.internal.h2.util.ColumnNamer;
+import org.gridgain.internal.h2.value.TypeInfo;
 import org.gridgain.internal.h2.value.Value;
 import org.gridgain.internal.h2.value.ValueInt;
 import org.gridgain.internal.h2.value.ValueNull;
@@ -121,7 +122,13 @@ public class SelectUnion extends Query {
         Mode mode = session.getDatabase().getMode();
         for (int i = 0; i < columnCount; i++) {
             Expression e = expressions.get(i);
-            newValues[i] = values[i].convertTo(e.getType(), mode, null);
+            if (values[i].getDynamicType() != null)
+            {
+                newValues[i] = values[i].convertTo(TypeInfo.getTypeInfo(values[i].getDynamicType()), mode, null);
+            }
+            else {
+                newValues[i] = values[i].convertTo(e.getType(), mode, null);
+            }
         }
         return newValues;
     }

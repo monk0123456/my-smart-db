@@ -99,10 +99,26 @@ public class BinaryOperation extends Expression {
     @Override
     public Value getValue(Session session) {
         Mode mode = session.getDatabase().getMode();
-        Value l = left.getValue(session).convertTo(type, mode, null);
+        Value myl = left.getValue(session);
+        Value l = null;
+        if (myl.getDynamicType() != null)
+        {
+            l = left.getValue(session).convertTo(TypeInfo.getTypeInfo(myl.getDynamicType()), mode, null);
+        }
+        else
+        {
+            l = left.getValue(session).convertTo(type, mode, null);
+        }
+        //Value l = left.getValue(session).convertTo(type, mode, null);
         Value r = right.getValue(session);
         if (convertRight) {
-            r = r.convertTo(type, mode, null);
+            if (myl.getDynamicType() != null)
+            {
+                r = r.convertTo(TypeInfo.getTypeInfo(myl.getDynamicType()), mode, null);
+            }
+            else {
+                r = r.convertTo(type, mode, null);
+            }
         }
         switch (opType) {
         case CONCAT: {

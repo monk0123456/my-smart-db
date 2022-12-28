@@ -489,6 +489,7 @@ public class FunctionAlias extends SchemaObjectBase {
                     {
                         dataType = DataType.getTypeFromClass((Class<?>) rv.get(1));
                         Value ret = DataType.convertToValue(session, rv.get(0), dataType);
+                        ret.setDynamicType(dataType);
                         return ret;
                     }
                 }

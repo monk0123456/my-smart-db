@@ -91,7 +91,13 @@ public class ConditionInSelect extends Condition {
                     }
                     l = leftList[0];
                 }
-                l = l.convertTo(colType, database.getMode(), null);
+                if (l.getDynamicType() != null)
+                {
+                    l = l.convertTo(TypeInfo.getTypeInfo(l.getDynamicType()), database.getMode(), null);
+                }
+                else {
+                    l = l.convertTo(colType, database.getMode(), null);
+                }
                 if (rows.containsDistinct(new Value[] { l })) {
                     return ValueBoolean.TRUE;
                 }

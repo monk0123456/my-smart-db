@@ -234,7 +234,14 @@ public class Comparison extends Condition {
                         // once.
                         if (constValueType != resType.getValueType()) {
                             Column column = ((ExpressionColumn) left).getColumn();
-                            right = ValueExpression.get(r.convertTo(resType, session.getDatabase().getMode(), column));
+
+                            if (r.getDynamicType() != null)
+                            {
+                                right = ValueExpression.get(r.convertTo(TypeInfo.getTypeInfo(r.getDynamicType()), session.getDatabase().getMode(), column));
+                            }
+                            else {
+                                right = ValueExpression.get(r.convertTo(resType, session.getDatabase().getMode(), column));
+                            }
                         }
                     }
                 } else if (right instanceof Parameter) {

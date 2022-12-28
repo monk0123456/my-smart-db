@@ -55,7 +55,14 @@ public class ConditionInConstantSet extends Condition {
         type = left.getType();
         Mode mode = database.getMode();
         for (Expression expression : valueList) {
-            add(expression.getValue(session).convertTo(type, mode, null));
+            Value mya = expression.getValue(session);
+            if (mya.getDynamicType() != null)
+            {
+                add(mya.convertTo(TypeInfo.getTypeInfo(mya.getDynamicType()), mode, null));
+            }
+            else {
+                add(mya.convertTo(type, mode, null));
+            }
         }
     }
 
@@ -165,7 +172,15 @@ public class ConditionInConstantSet extends Condition {
         if (add != null) {
             if (add.isConstant()) {
                 valueList.add(add);
-                add(add.getValue(session).convertTo(type, session.getDatabase().getMode(), null));
+                Value mya = add.getValue(session);
+                if (mya.getDynamicType() != null)
+                {
+                    add(mya.convertTo(TypeInfo.getTypeInfo(mya.getDynamicType()), session.getDatabase().getMode(), null));
+                }
+                else {
+                    //add(add.getValue(session).convertTo(type, session.getDatabase().getMode(), null));
+                    add(mya.convertTo(type, session.getDatabase().getMode(), null));
+                }
                 return this;
             }
         }

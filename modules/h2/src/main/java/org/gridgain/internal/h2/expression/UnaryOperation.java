@@ -34,7 +34,14 @@ public class UnaryOperation extends Expression {
 
     @Override
     public Value getValue(Session session) {
-        Value a = arg.getValue(session).convertTo(type, session.getDatabase().getMode(), null);
+        Value mya = arg.getValue(session);
+        if (mya.getDynamicType() != null)
+        {
+            Value a = mya.convertTo(TypeInfo.getTypeInfo(mya.getDynamicType()), session.getDatabase().getMode(), null);
+            return a == ValueNull.INSTANCE ? a : a.negate();
+        }
+        Value a = mya.convertTo(type, session.getDatabase().getMode(), null);
+        //Value a = arg.getValue(session).convertTo(type, session.getDatabase().getMode(), null);
         return a == ValueNull.INSTANCE ? a : a.negate();
     }
 

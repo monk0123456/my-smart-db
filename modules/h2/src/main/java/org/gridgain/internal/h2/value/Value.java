@@ -260,6 +260,17 @@ public abstract class Value extends VersionedValue {
      */
     public static final BigDecimal MIN_LONG_DECIMAL = BigDecimal.valueOf(Long.MIN_VALUE);
 
+    // 动态返回类型
+    private Integer dynamicType = null;
+
+    public Integer getDynamicType() {
+        return dynamicType;
+    }
+
+    public void setDynamicType(Integer dynamicType) {
+        this.dynamicType = dynamicType;
+    }
+
     /**
      * Check the range of the parameters.
      *

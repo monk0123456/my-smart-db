@@ -903,7 +903,14 @@ public class Function extends Expression implements FunctionCall {
         case CONVERT: {
             Mode mode = database.getMode();
             TypeInfo type = this.type;
-            v0 = v0.convertTo(type, mode, null);
+            if (v0.getDynamicType() != null)
+            {
+                v0 = v0.convertTo(TypeInfo.getTypeInfo(v0.getDynamicType()), mode, null);
+            }
+            else
+            {
+                v0 = v0.convertTo(type, mode, null);
+            }
             v0 = v0.convertScale(mode.convertOnlyToSmallerScale, type.getScale());
             v0 = v0.convertPrecision(type.getPrecision(), false);
             result = v0;
@@ -932,7 +939,13 @@ public class Function extends Expression implements FunctionCall {
             if (v0 == ValueNull.INSTANCE) {
                 result = getNullOrValue(session, args, values, 1);
             }
-            result = result.convertTo(type, database.getMode(), null);
+            if (result.getDynamicType() != null)
+            {
+                result = result.convertTo(TypeInfo.getTypeInfo(result.getDynamicType()), database.getMode(), null);
+            }
+            else {
+                result = result.convertTo(type, database.getMode(), null);
+            }
             break;
         }
         case CASEWHEN: {
@@ -942,7 +955,13 @@ public class Function extends Expression implements FunctionCall {
             } else {
                 v = getNullOrValue(session, args, values, 1);
             }
-            result = v.convertTo(type, database.getMode(), null);
+            if (v.getDynamicType() != null)
+            {
+                result = v.convertTo(TypeInfo.getTypeInfo(v.getDynamicType()), database.getMode(), null);
+            }
+            else {
+                result = v.convertTo(type, database.getMode(), null);
+            }
             break;
         }
         case DECODE: {
@@ -959,7 +978,13 @@ public class Function extends Expression implements FunctionCall {
             }
             Value v = index < 0 ? ValueNull.INSTANCE :
                     getNullOrValue(session, args, values, index);
-            result = v.convertTo(type, database.getMode(), null);
+            if (v.getDynamicType() != null)
+            {
+                result = v.convertTo(TypeInfo.getTypeInfo(v.getDynamicType()), database.getMode(), null);
+            }
+            else {
+                result = v.convertTo(type, database.getMode(), null);
+            }
             break;
         }
         case NVL2: {
@@ -969,7 +994,13 @@ public class Function extends Expression implements FunctionCall {
             } else {
                 v = getNullOrValue(session, args, values, 1);
             }
-            result = v.convertTo(type, database.getMode(), null);
+            if (v.getDynamicType() != null)
+            {
+                result = v.convertTo(TypeInfo.getTypeInfo(v.getDynamicType()), database.getMode(), null);
+            }
+            else {
+                result = v.convertTo(type, database.getMode(), null);
+            }
             break;
         }
         case COALESCE: {
@@ -977,7 +1008,13 @@ public class Function extends Expression implements FunctionCall {
             for (int i = 0; i < args.length; i++) {
                 Value v = getNullOrValue(session, args, values, i);
                 if (v != ValueNull.INSTANCE) {
-                    result = v.convertTo(type, database.getMode(), null);
+                    if (v.getDynamicType() != null)
+                    {
+                        result = v.convertTo(TypeInfo.getTypeInfo(v.getDynamicType()), database.getMode(), null);
+                    }
+                    else {
+                        result = v.convertTo(type, database.getMode(), null);
+                    }
                     break;
                 }
             }
@@ -989,7 +1026,13 @@ public class Function extends Expression implements FunctionCall {
             for (int i = 0; i < args.length; i++) {
                 Value v = getNullOrValue(session, args, values, i);
                 if (v != ValueNull.INSTANCE) {
-                    v = v.convertTo(type, database.getMode(), null);
+                    if (v.getDynamicType() != null)
+                    {
+                        v = v.convertTo(TypeInfo.getTypeInfo(v.getDynamicType()), database.getMode(), null);
+                    }
+                    else {
+                        v = v.convertTo(type, database.getMode(), null);
+                    }
                     if (result == ValueNull.INSTANCE) {
                         result = v;
                     } else {
@@ -1040,7 +1083,13 @@ public class Function extends Expression implements FunctionCall {
                 then = args[args.length - 1];
             }
             Value v = then == null ? ValueNull.INSTANCE : then.getValue(session);
-            result = v.convertTo(type, database.getMode(), null);
+            if (v.getDynamicType() != null)
+            {
+                result = v.convertTo(TypeInfo.getTypeInfo(v.getDynamicType()), database.getMode(), null);
+            }
+            else {
+                result = v.convertTo(type, database.getMode(), null);
+            }
             break;
         }
         case ARRAY_GET: {
