@@ -2,7 +2,6 @@ package org.gridgain.myservice;
 
 import cn.mysuper.service.IMyPlusFunc;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,18 +11,11 @@ import org.gridgain.plus.dml.MySmartScenes;
 import org.gridgain.plus.sql.MySuperSql;
 import org.gridgain.plus.sql.jdbc.SmartJdbcFunc;
 import org.gridgain.smart.ml.MyTrianDataUtil;
-import org.smart.service.MySmartScenesService;
-import org.tools.MyGson;
 import org.tools.MyPlusUtil;
 
 public class MyPlusFuncImpl implements IMyPlusFunc {
 
-    private MySmartScenes mySmartScenes = null;
-
-    public MyPlusFuncImpl()
-    {
-        mySmartScenes = MySmartScenesService.getInstance().getMySmartScenes();
-    }
+    private MySmartScenes mySmartScenes = new MySmartScenes();
 
     @Override
     public Boolean hasConnPermission(String userToken) {
@@ -53,7 +45,7 @@ public class MyPlusFuncImpl implements IMyPlusFunc {
         {
             lst.add(m);
         }
-        return this.mySmartScenes.invokeFunc(Ignition.ignite(), methodName, lst);
+        return mySmartScenes.invokeFunc(Ignition.ignite(), methodName, lst);
     }
 
 //    @Override
@@ -73,7 +65,7 @@ public class MyPlusFuncImpl implements IMyPlusFunc {
         {
             lst.add(m);
         }
-        return this.mySmartScenes.invokeScenes(Ignition.ignite(), user_token, methodName, lst);
+        return mySmartScenes.invokeScenes(Ignition.ignite(), user_token, methodName, lst);
     }
 
 //    @Override
