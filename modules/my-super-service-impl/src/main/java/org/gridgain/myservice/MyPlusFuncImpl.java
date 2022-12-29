@@ -15,7 +15,23 @@ import org.tools.MyPlusUtil;
 
 public class MyPlusFuncImpl implements IMyPlusFunc {
 
-    private MySmartScenes mySmartScenes = new MySmartScenes();
+    private static class InstanceHolder {
+        public static MyPlusFuncImpl instance = new MyPlusFuncImpl();
+    }
+
+    /**
+     * 获取单例模式
+     * */
+    public static MyPlusFuncImpl getInstance() {
+        return InstanceHolder.instance;
+    }
+
+    private MySmartScenes mySmartScenes;
+
+    private MyPlusFuncImpl()
+    {
+        mySmartScenes = new MySmartScenes();
+    }
 
     @Override
     public Boolean hasConnPermission(String userToken) {

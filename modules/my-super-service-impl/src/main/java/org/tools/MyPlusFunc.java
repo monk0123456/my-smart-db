@@ -18,7 +18,7 @@ import java.util.List;
 public class MyPlusFunc implements Serializable {
 
     private static final long serialVersionUID = 175563786053447344L;
-    private static IMyPlusFunc myPlusFunc = new MyPlusFuncImpl();
+    private static IMyPlusFunc myPlusFunc = MyPlusFuncImpl.getInstance();
     private static Gson gson = (new GsonBuilder()).enableComplexMapKeySerialization().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     /**

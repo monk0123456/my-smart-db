@@ -4,5 +4,7 @@ org/gridgain/myservice/jdbc/CallFuncImpl.class
 org/gridgain/myservice/MyThinStatementImpl.class
 org/gridgain/myservice/MyLoadCronImpl.class
 org/tools/MyPlusFunc.class
+org/gridgain/myservice/MyPlusFuncImpl$InstanceHolder.class
 org/gridgain/myservice/MyPlusFuncImpl.class
+org/gridgain/myservice/MyPlusFuncImpl$1.class
 org/gridgain/myservice/MyConnectionImpl.class
