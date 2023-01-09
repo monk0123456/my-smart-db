@@ -29,7 +29,8 @@
         <relativePath>parent</relativePath>
     </parent>
 
-    <artifactId>apache-ignite</artifactId>
+<!--    <artifactId>apache-ignite</artifactId>-->
+    <artifactId>dawn-sql-db</artifactId>
     <version>8.8.20</version>
     <packaging>pom</packaging>
 

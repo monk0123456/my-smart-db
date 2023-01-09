@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.gridgain:ignite-core:test-jar:tests:8.8.20">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/modules/core/pom.xml!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/modules/core/ignite-core-8.8.20-test-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/modules/core/ignite-core-8.8.20-test-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

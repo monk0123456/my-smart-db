@@ -37,7 +37,7 @@
 
     <dependency>
       <groupId>org.gridgain</groupId>
-      <artifactId>ignite-core</artifactId>
+      <artifactId>dawn-sql-core</artifactId>
       <version>${gridgain.version}</version>
     </dependency>
 

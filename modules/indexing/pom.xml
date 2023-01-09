@@ -29,7 +29,8 @@
         <relativePath>../../parent</relativePath>
     </parent>
 
-    <artifactId>ignite-indexing</artifactId>
+<!--    <artifactId>ignite-indexing</artifactId>-->
+    <artifactId>dawn-sql-indexing</artifactId>
     <version>8.8.20</version>
     <url>http://ignite.apache.org</url>
 
@@ -43,7 +44,7 @@
 
         <dependency>
             <groupId>org.gridgain</groupId>
-            <artifactId>ignite-core</artifactId>
+            <artifactId>dawn-sql-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -73,13 +74,13 @@
 
         <dependency>
             <groupId>org.gridgain</groupId>
-            <artifactId>ignite-h2</artifactId>
+            <artifactId>dawn-sql-h2</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.gridgain</groupId>
-            <artifactId>ignite-core</artifactId>
+            <artifactId>dawn-sql-core</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>

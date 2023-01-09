@@ -29,7 +29,8 @@
         <relativePath>../../parent</relativePath>
     </parent>
 
-    <artifactId>ignite-core</artifactId>
+<!--    <artifactId>ignite-core</artifactId>-->
+    <artifactId>dawn-sql-core</artifactId>
     <version>8.8.20</version>
     <url>http://ignite.apache.org</url>
 

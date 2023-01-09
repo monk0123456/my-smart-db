@@ -12,7 +12,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ignite-shmem-8.7.3" level="project" />
-    <orderEntry type="module" module-name="ignite-core" />
+    <orderEntry type="module" module-name="dawn-sql-core" />
     <orderEntry type="module" module-name="my-super-service" />
     <orderEntry type="library" name="Maven: org.clojure:clojure:1.10.1" level="project" />
     <orderEntry type="library" name="Maven: org.clojure:spec.alpha:0.2.176" level="project" />
@@ -42,6 +42,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Maven: org.gridgain:ignite-slf4j:8.8.20" level="project" />
+    <orderEntry type="library" name="Maven: org.gridgain:ignite-core:8.8.20" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.32" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.32" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jul-to-slf4j:1.7.32" level="project" />
@@ -49,7 +50,7 @@
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" name="Maven: info.picocli:picocli:3.3.0" level="project" />
-    <orderEntry type="module" module-name="ignite-core" scope="TEST" production-on-test="" />
+    <orderEntry type="module" module-name="dawn-sql-core" scope="TEST" production-on-test="" />
     <orderEntry type="library" scope="TEST" name="Maven: org.gridgain:ignite-tools:8.8.20" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jodd:jodd-lagarto:5.1.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jodd:jodd-core:5.1.4" level="project" />

@@ -24,7 +24,7 @@ interested in):
         ...
         <dependency>
             <groupId>org.gridgain</groupId>
-            <artifactId>ignite-indexing</artifactId>
+            <artifactId>dawn-sql-indexing</artifactId>
             <version>${ignite.version}</version>
         </dependency>
         ...

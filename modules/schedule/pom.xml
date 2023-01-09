@@ -29,7 +29,8 @@
         <relativePath>../../parent</relativePath>
     </parent>
 
-    <artifactId>ignite-schedule</artifactId>
+<!--    <artifactId>ignite-schedule</artifactId>-->
+    <artifactId>dawn-sql-schedule</artifactId>
     <version>8.8.20</version>
     <url>http://ignite.apache.org</url>
 
@@ -43,7 +44,7 @@
     <dependencies>
         <dependency>
             <groupId>org.gridgain</groupId>
-            <artifactId>ignite-core</artifactId>
+            <artifactId>dawn-sql-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 

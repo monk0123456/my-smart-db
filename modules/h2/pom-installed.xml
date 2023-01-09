@@ -18,10 +18,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.gridgain</groupId>
-  <artifactId>ignite-h2</artifactId>
+  <artifactId>dawn-sql-h2</artifactId>
   <version>8.8.20</version>
   <description>H2 Database Engine Fork</description>
-  <url>http://www.gridgain.com/ignite-h2</url>
+  <url>http://www.gridgain.com/dawn-sql-h2</url>
   <organization>
     <name>The Apache Software Foundation</name>
     <url>http://www.apache.org/</url>
@@ -85,9 +85,9 @@
     </mailingList>
   </mailingLists>
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/maven/pom/tags/apache-16/community.parent/ignite-h2</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/maven/pom/tags/apache-16/community.parent/ignite-h2</developerConnection>
-    <url>http://svn.apache.org/viewvc/maven/pom/tags/apache-16/community.parent/ignite-h2</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/maven/pom/tags/apache-16/community.parent/dawn-sql-h2</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/maven/pom/tags/apache-16/community.parent/dawn-sql-h2</developerConnection>
+    <url>http://svn.apache.org/viewvc/maven/pom/tags/apache-16/community.parent/dawn-sql-h2</url>
   </scm>
   <issueManagement>
     <system>jira</system>
@@ -114,7 +114,7 @@
     <osgi.import.package>*</osgi.import.package>
     <osgi.fail.ok>false</osgi.fail.ok>
     <hamcrest.version>2.2</hamcrest.version>
-    <ignite.orig.edition>apache-ignite</ignite.orig.edition>
+    <ignite.orig.edition>dawn-sql-db</ignite.orig.edition>
     <javadoc.opts>-Xdoclint:none</javadoc.opts>
     <postgres.connector.version>42.2.23</postgres.connector.version>
     <maven.build.timestamp.format>MMMM d yyyy</maven.build.timestamp.format>
@@ -217,7 +217,7 @@
     <paho.version>1.0.2</paho.version>
     <jackson1.version>1.9.13</jackson1.version>
     <javassist.version>3.21.0-GA</javassist.version>
-    <ignite.edition>apache-ignite</ignite.edition>
+    <ignite.edition>dawn-sql-db</ignite.edition>
     <jackson.version>2.13.3</jackson.version>
     <spring.version>5.2.21.RELEASE</spring.version>
     <failIfNoTests>false</failIfNoTests>

@@ -31,7 +31,8 @@
         <relativePath>../../parent</relativePath>
     </parent>
 
-    <artifactId>ignite-h2</artifactId>
+<!--    <artifactId>ignite-h2</artifactId>-->
+    <artifactId>dawn-sql-h2</artifactId>
     <version>8.8.20</version>
     <description>H2 Database Engine Fork</description>
 

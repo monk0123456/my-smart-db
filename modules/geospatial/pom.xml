@@ -36,7 +36,7 @@
     <dependencies>
         <dependency>
             <groupId>org.gridgain</groupId>
-            <artifactId>ignite-indexing</artifactId>
+            <artifactId>dawn-sql-indexing</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -48,7 +48,7 @@
 
         <dependency>
             <groupId>org.gridgain</groupId>
-            <artifactId>ignite-core</artifactId>
+            <artifactId>dawn-sql-core</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>

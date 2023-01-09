@@ -8,23 +8,30 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ignite-indexing" />
-        <module name="ignite-core" />
+        <module name="my-thin-client-service" />
         <module name="ignite-geospatial" />
         <module name="ignite-tensorflow" />
         <module name="my-super-service" />
-        <module name="my-dawn-rpc-server" />
-        <module name="ignite-h2" />
-        <module name="my-back-up" />
-        <module name="ignite-schedule" />
-        <module name="my-thin-client-service" />
         <module name="ignite-spring" />
+        <module name="dawn-sql-schedule" />
+        <module name="my-dawn-rpc-server" />
+        <module name="dawn-sql-indexing" />
+        <module name="ignite-h2" />
+        <module name="dawn-sql-h2" />
+        <module name="my-back-up" />
+        <module name="dawn-sql-core" />
+        <module name="ignite-schedule" />
+        <module name="my-thin-client" />
         <module name="my-super-service-impl" />
         <module name="ignite-ml" />
-        <module name="my-thin-client" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="apache-ignite" target="1.8" />
+      <module name="dawn-sql-core" target="1.8" />
+      <module name="dawn-sql-h2" target="8" />
+      <module name="dawn-sql-indexing" target="1.8" />
+      <module name="dawn-sql-schedule" target="1.8" />
       <module name="ignite-core" target="1.8" />
       <module name="ignite-geospatial" target="1.8" />
       <module name="ignite-h2" target="8" />

@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Maven: org.gridgain:ignite-core:8.8.20">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/gridgain/ignite-core/8.8.20/ignite-core-8.8.20.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/modules/core/ignite-core-8.8.20-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/gridgain/ignite-core/8.8.20/ignite-core-8.8.20-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/modules/core/ignite-core-8.8.20-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/gridgain/ignite-core/8.8.20/ignite-core-8.8.20-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

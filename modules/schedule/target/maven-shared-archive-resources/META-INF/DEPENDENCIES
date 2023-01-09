@@ -3,7 +3,7 @@
 // maven pom organized by organization.
 // ------------------------------------------------------------------
 
-ignite-schedule
+dawn-sql-schedule
 
 
 From: 'an unknown organization'
@@ -56,7 +56,7 @@ From: 'The Apache Software Foundation' (http://www.apache.org/)
     License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
   - Apache HttpCore (http://hc.apache.org/httpcomponents-core-ga) org.apache.httpcomponents:httpcore:jar:4.4.1
     License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
-  - ignite-core (http://ignite.apache.org) org.gridgain:ignite-core:jar:8.8.20
+  - dawn-sql-core (http://ignite.apache.org) org.gridgain:dawn-sql-core:jar:8.8.20
     License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
 
 

@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/apache-ignite.iml" filepath="$PROJECT_DIR$/apache-ignite.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/core/ignite-core.iml" filepath="$PROJECT_DIR$/modules/core/ignite-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/core/dawn-sql-core.iml" filepath="$PROJECT_DIR$/modules/core/dawn-sql-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/h2/dawn-sql-h2.iml" filepath="$PROJECT_DIR$/modules/h2/dawn-sql-h2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/indexing/dawn-sql-indexing.iml" filepath="$PROJECT_DIR$/modules/indexing/dawn-sql-indexing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/schedule/dawn-sql-schedule.iml" filepath="$PROJECT_DIR$/modules/schedule/dawn-sql-schedule.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/geospatial/ignite-geospatial.iml" filepath="$PROJECT_DIR$/modules/geospatial/ignite-geospatial.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/h2/ignite-h2.iml" filepath="$PROJECT_DIR$/modules/h2/ignite-h2.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/indexing/ignite-indexing.iml" filepath="$PROJECT_DIR$/modules/indexing/ignite-indexing.iml" />
