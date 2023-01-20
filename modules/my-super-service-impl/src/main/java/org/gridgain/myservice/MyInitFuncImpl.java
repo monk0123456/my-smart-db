@@ -29,14 +29,16 @@ public class MyInitFuncImpl implements IInitFunc {
 
         MyInitCache myInitCache = new MyInitCache();
         myInitCache.InitCache(ignite);
+        System.out.println("语法树的初始化");
 
         PlusInit plusInit = new PlusInit(ignite);
         plusInit.initialization();
+        System.out.println("Meta 表的初始化");
 
         GridKernalContext ctx = ((IgniteEx)ignite).context();
         IgniteH2Indexing h2Indexing = (IgniteH2Indexing)ctx.query().getIndexing();
         ConnectionManager connMgr = h2Indexing.connections();
-        //System.out.println("自定义方法的初始化");
+        System.out.println("自定义方法的初始化");
 
         try {
             String clause = "CREATE ALIAS IF NOT EXISTS auto_id FOR \"org.tools.MyPlusFunc.auto_id\"";
@@ -104,13 +106,17 @@ public class MyInitFuncImpl implements IInitFunc {
 
             //IgniteCache<MyCachePK, MyCaches> my_caches = ignite.cache("my_caches");
             MyNoSqlUtil.initCaches(ignite);
+            System.out.println("NoSql init!");
             // 加载定时任务
             SmartFunc.initJob(ignite);
+            System.out.println("Job init!");
             // (SmartInit/mySmartInit ignite)
             SmartInit.mySmartInit(ignite);
+            System.out.println("SmartInit init!");
 
             // 加载一开始就执行的程序
             loadAppCls(ignite);
+            System.out.println("loadAppCls init!");
             System.out.println("加载完成！");
         } catch (IgniteCheckedException var5) {
             var5.printStackTrace();

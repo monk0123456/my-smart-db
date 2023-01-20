@@ -1630,6 +1630,7 @@ public class GridClusterStateProcessor extends GridProcessorAdapter implements I
 
                     ctx.txDr().onActivate(ctx);
 
+                    log.info("MyInitFuncService initFunc 启动！");
                     MyInitFuncService.getInstance().getInitFunc().initFunc();
 
                     if (log.isInfoEnabled())
